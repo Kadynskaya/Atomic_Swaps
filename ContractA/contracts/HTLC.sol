@@ -3,10 +3,15 @@ pragma solidity >=0.6.0;
 
 contract HTLC {    
     string public version = "0.0.1";
-    bytes32 public digest = 0x2e99758548972a8e8822ad47fa1017ff72f06f3ff6a016851f45c398732bc50c;
-    address payable public dest = 0xa3Cea76EB5cb584f6Db76294fA7d214eEFA1d2Ac;
+    bytes32 public digest;
+    address payable public dest;
     uint public timeOut = block.timestamp + 10 minutes;
     address payable issuer = msg.sender; 
+
+    constructor (bytes32 _digest, address payable _dest) public {
+        digest = _digest;
+        dest = _dest;
+    }
 
     modifier onlyIssuer {require(msg.sender == issuer); _; }
   
